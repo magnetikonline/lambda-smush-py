@@ -25,43 +25,43 @@ def read_arguments():
 
 	parser.add_argument(
 		'--source',
-		help = 'Path to Lambda function',
+		help = 'path to Lambda function',
 		required = True
 	)
 
 	parser.add_argument(
 		'--handler-name',
-		help = 'Name of handler Lambda calls to invoke function',
+		help = 'name of handler Lambda calls to invoke function',
 		required = True
 	)
 
 	parser.add_argument(
 		'--strip-comments',
 		action = 'store_true',
-		help = 'Remove comment only lines to further reduce function size'
+		help = 'remove comment only lines to further reduce function size'
 	)
 
 	parser.add_argument(
 		'--strip-empty-lines',
 		action = 'store_true',
-		help = 'Remove empty lines to further reduce function size'
+		help = 'remove empty lines to further reduce function size'
 	)
 
 	parser.add_argument(
 		'--template',
-		help = 'Merge generated code into given YAML CloudFormation template',
+		help = 'merge generated code into given YAML CloudFormation template',
 		metavar = 'YAML'
 	)
 
 	parser.add_argument(
 		'--template-placeholder',
-		help = 'Place holder text within CloudFormation template',
+		help = 'place holder text within CloudFormation template',
 		metavar = 'PLACEHOLDER'
 	)
 
 	parser.add_argument(
 		'--output',
-		help = 'Write output to given filename, otherwise send to console',
+		help = 'write output to given filename, otherwise send to console',
 		metavar = 'FILE'
 	)
 

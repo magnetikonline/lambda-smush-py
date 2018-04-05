@@ -41,22 +41,22 @@ usage: lambdasmushpy.py [-h] --source SOURCE --handler-name HANDLER_NAME
                         [--template YAML] [--template-placeholder PLACEHOLDER]
                         [--output FILE]
 
-Generates compressed Python based AWS Lambda functions to fit within the
-maximum 4KB codesize limit of a CloudFormation template
+Generates compressed Python based AWS Lambda functions designed to fit within
+the 4096 byte in-line limit of a CloudFormation template
 
 optional arguments:
   -h, --help            show this help message and exit
-  --source SOURCE       Path to Lambda function
+  --source SOURCE       path to Lambda function
   --handler-name HANDLER_NAME
-                        Name of handler Lambda calls to invoke function
-  --strip-comments      Remove comment only lines to further reduce function
+                        name of handler Lambda calls to invoke function
+  --strip-comments      remove comment only lines to further reduce function
                         size
-  --strip-empty-lines   Remove empty lines to further reduce function size
-  --template YAML       Merge generated code into given YAML CloudFormation
+  --strip-empty-lines   remove empty lines to further reduce function size
+  --template YAML       merge generated code into given YAML CloudFormation
                         template
   --template-placeholder PLACEHOLDER
-                        Place holder text within CloudFormation template
-  --output FILE         Write output to given filename, otherwise send to
+                        place holder text within CloudFormation template
+  --output FILE         write output to given filename, otherwise send to
                         console
 ```
 
