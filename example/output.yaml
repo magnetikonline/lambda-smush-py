@@ -13,7 +13,7 @@ Resources:
         ZipFile: |
           import base64,imp,tempfile,zlib
           _='''\
-          eNpFjEsKwkAQBdfmFO2qMxDEtWfwDjJmXuLATLc0HT9I7m4CfpYFVZUw0CVKKrAWN4h3vYrj4eHQbIqOp+wtq4DDH/2uKxp8MiHuYylIVJ/f0ZabtGw/ukz1DFt3V8uy5EcdqWQBvfYz7wa1Gn9WeAO2YjBA\
+          eNpFjL0KwkAQBmvzFGt1ORCxTmvrO8jpfYkHe7uybKIivrsJ+FMOzExGT5ckmWEtJohvziqOu8euWbEOx+JtUEGIf/SbLmjw0YTCPjEjU318R+vQ5Hn70WWsJ9iyu1qROT/oQFwEHT13r7Dt1Wr6afEN2rUwWg==\
           '''
           l=tempfile.mkdtemp()+'/l.py'
           h=open(l,'w')
@@ -22,7 +22,6 @@ Resources:
           m=imp.load_source('l',l)
           def handler(e,c):
           	return m.handler(e,c)
-
       Description: "Smushed Python function"
       FunctionName: !Ref "lambdaFunctionName"
       Handler: "index.handler"

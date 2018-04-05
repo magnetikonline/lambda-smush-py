@@ -19,8 +19,8 @@ def read_arguments():
 	# create parser
 	parser = argparse.ArgumentParser(
 		description =
-			'Generates compressed Python based AWS Lambda functions to fit within the '
-			'maximum 4KB codesize limit of a CloudFormation template'
+			'Generates compressed Python based AWS Lambda functions designed to fit '
+			'within the 4096 byte in-line limit of a CloudFormation template'
 	)
 
 	parser.add_argument(
@@ -82,8 +82,10 @@ def read_arguments():
 	if (not handler_name):
 		exit_error('given --handler-name can\'t be empty')
 
-	# contains given handler name?
-	lambda_source = get_file_content(arg_list.source)
+	# read lambda source, remove any top/tail whitespace
+	lambda_source = get_file_content(arg_list.source).strip()
+
+	# function has given handler name?
 	match = re.search(
 		r'^def +{0}\([^\)]+\) *:[ \t]*$'.format(handler_name),
 		lambda_source,
@@ -201,7 +203,7 @@ h.write(zlib.decompress(base64.b64decode(_)))
 h.close()
 m=imp.load_source('l',l)
 def {1}(e,c):
-	return m.{1}(e,c)
+	return m.{1}(e,c)\
 '''.format(
 		build_base64_source(),
 		lambda_handler_name
@@ -269,10 +271,10 @@ def main():
 		fh.write(result)
 		fh.close()
 
-		print('Generated Lambda function written to [{0}]'.format(output_filename))
+		print('Lambda function written to [{0}]'.format(output_filename))
 
 	else:
-		print(result)
+		print(result + '\n')
 
 
 if (__name__ == '__main__'):

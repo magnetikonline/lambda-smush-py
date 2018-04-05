@@ -12,7 +12,7 @@ Resources:
       Code:
         ZipFile: |
           %%SMUSH_FUNCTION%%
-      Description: "Smushed Python Function"
+      Description: "Smushed Python function"
       FunctionName: !Ref "lambdaFunctionName"
       Handler: "index.handler"
       MemorySize: 128
