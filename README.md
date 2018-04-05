@@ -1,14 +1,14 @@
 # Lambda smush py
-Utility with the sole aim to squeeze that little bit more code out of Python based [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) functions defined in-line via [CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html) templates.
+Utility with the sole aim to squeeze that little bit more code out of Python based [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) functions defined in-line to [CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html) templates.
 
 - [How it works](#how-it-works)
 - [Usage](#usage)
 - [Examples](#examples)
 
 ## How it works
-The CloudFormation team have provided an ability to define Lambda function code directly within a template for Python and Node.js based runtimes via the [`Code:` property](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-code) - negating the need for an S3 code bucket and keeping smaller utility functions tightly coupled with a stack.
+CloudFormation offers the ability to define Lambda function code _directly within templates_ for Python and Node.js runtimes via the [`Code:` property](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-code) - negating the need for an S3 code bucket and great for keeping smaller functions tightly coupled with a stack.
 
-Unfortunately the allowed code size, including whitespace, is limited to only [4096 characters](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html#cfn-lambda-function-code-zipfile). With this utility a Python based Lambda is transformed to a compressed source which is inflated at runtime - to gain a few additional kilobytes of usable space for in-lined functions.
+Unfortunately the allowed code size - including whitespace, is limited to [4096 characters](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html#cfn-lambda-function-code-zipfile). With this utility a Python based Lambda function is transformed to a compressed equivalent which is inflated at runtime to gain additional kilobytes of usable space for in-lined functions.
 
 At time of invoke the following steps are executed:
 - Temporary file created within the Lambda container.
@@ -61,22 +61,22 @@ optional arguments:
 ```
 
 ## Examples
-Source function `lambda.py` with handler name `my_handler()` is compressed, with the result outputted direct to console:
+Source function `/path/to/lambda.py` with handler `my_handler()` is compressed, with the result sent to console:
 
 ```sh
 $ ./lambdasmushpy.py" \
 	--source "/path/to/lambda.py" \
-	--handler-name "my-handler"
+	--handler-name "my_handler"
 ```
 
-Additionally, generated functions can be embedded directly into a given CloudFormation YAML template by way of a defined placeholder.
+Generated functions can also be embedded directly into CloudFormation YAML templates through the use of a placeholder.
 
-For this example the compressed source is further reduced by removing all source comments and empty lines, with the final result written to `/path/to/final/template.yaml`:
+For this example the compressed source is further reduced by removing comment and empty lines, the final embedded result is written to `/path/to/final/template.yaml`:
 
 ```sh
 $ ./lambdasmushpy.py" \
 	--source "/path/to/lambda.py" \
-	--handler-name "my-handler" \
+	--handler-name "my_handler" \
 	--strip-comments \
 	--strip-empty-lines \
 	--template "/path/to/source/template.yaml" \
